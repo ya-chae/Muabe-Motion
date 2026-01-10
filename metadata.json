@@ -1,0 +1,8 @@
+{
+  "name": "MUABE MOTION - Immersive Interaction",
+  "description": "A high-end tech landing page for MUABE MOTION, featuring the Quark interaction engine, interactive demos, and futuristic dark-mode design with red neon accents.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
