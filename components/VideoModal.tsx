@@ -17,7 +17,6 @@ const VideoModal: React.FC<VideoModalProps> = ({ demo, onClose }) => {
   const [viewportOrientation, setViewportOrientation] = useState<'portrait' | 'landscape'>('landscape');
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // YouTube ID 추출
   const getYouTubeId = (url: string) => {
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
     const match = url.match(regExp);
@@ -27,7 +26,6 @@ const VideoModal: React.FC<VideoModalProps> = ({ demo, onClose }) => {
   const youtubeId = getYouTubeId(demo.videoUrl);
   const isYouTube = !!youtubeId;
 
-  // 스크롤 방지
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     return () => {
@@ -35,7 +33,6 @@ const VideoModal: React.FC<VideoModalProps> = ({ demo, onClose }) => {
     };
   }, []);
 
-  // ESC 키로 닫기
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -44,7 +41,6 @@ const VideoModal: React.FC<VideoModalProps> = ({ demo, onClose }) => {
     return () => window.removeEventListener('keydown', handleEsc);
   }, [onClose]);
 
-  // 화면 방향 감지
   useEffect(() => {
     const updateOrientation = () => {
       setViewportOrientation(window.innerHeight > window.innerWidth ? 'portrait' : 'landscape');
@@ -57,7 +53,6 @@ const VideoModal: React.FC<VideoModalProps> = ({ demo, onClose }) => {
   const handleMetadata = () => {
     if (videoRef.current) {
       const { videoWidth, videoHeight, duration } = videoRef.current;
-      // 가로형 영상 판단 기준 (약간의 오차 허용)
       setIsLandscapeVideo(videoWidth / videoHeight >= 1.0);
       setDuration(duration);
       if (videoRef.current.readyState >= 2) setIsLoading(false);
@@ -99,7 +94,6 @@ const VideoModal: React.FC<VideoModalProps> = ({ demo, onClose }) => {
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
 
-  // 세로 모드 기기에서 가로 영상을 볼 때만 회전 적용
   const shouldRotate = viewportOrientation === 'portrait' && isLandscapeVideo && !isYouTube;
   const youtubeEmbedUrl = isYouTube 
     ? `https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&mute=0&rel=0&modestbranding=1&enablejsapi=1&origin=${window.location.origin}`
@@ -118,28 +112,28 @@ const VideoModal: React.FC<VideoModalProps> = ({ demo, onClose }) => {
           flex flex-col overflow-hidden transition-all duration-500 ease-out
           ${shouldRotate 
             ? 'fixed-rotation-layout' 
-            : `rounded-[20px] sm:rounded-[36px] md:rounded-[40px] border max-h-[95vh] sm:max-h-[90vh]
+            : `rounded-[20px] sm:rounded-[36px] md:rounded-[40px] border max-h-[95vh] sm:max-h-[92vh]
                ${isLandscapeVideo || isYouTube 
-                 ? 'w-full lg:w-[1280px] lg:max-w-[90vw] lg:aspect-video' 
-                 : 'w-auto max-w-[90vw] h-full lg:h-[85vh]'
+                 ? 'w-full lg:w-[1340px] lg:max-w-[92vw] aspect-auto' 
+                 : 'w-auto max-w-[92vw] h-full lg:h-[88vh]'
                }`
           }
         `}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Modal Header - Mobile: Floating, Desktop: Top Bar */}
+        {/* Modal Header - Optimized for PC (Slimmer) */}
         <div className={`
           flex justify-between items-center shrink-0 z-[80]
           ${shouldRotate 
             ? 'px-12 py-6 absolute top-0 left-0 right-0 bg-transparent pointer-events-none' 
-            : 'sm:relative sm:p-8 md:p-10 lg:px-12 lg:py-8 sm:bg-gradient-to-b sm:from-bg-0/95 sm:to-transparent absolute top-0 left-0 right-0 p-5 bg-transparent pointer-events-none'
+            : 'sm:relative px-6 py-4 sm:px-8 sm:py-5 md:px-10 md:py-6 lg:px-12 lg:py-5 sm:bg-bg-1/50 border-b border-white/5 absolute top-0 left-0 right-0 bg-transparent pointer-events-none sm:pointer-events-auto'
           }
         `}>
           <div className="flex-1 pr-6 hidden sm:block">
-            <p className="text-accent font-black uppercase tracking-[0.25em] text-[10px] sm:text-[12px] md:text-[13px] mb-1 opacity-90">
+            <p className="text-accent font-black uppercase tracking-[0.25em] text-[9px] sm:text-[10px] md:text-[11px] mb-0.5 opacity-90">
               {demo.title}
             </p>
-            <h3 className="text-text-1 font-extrabold tracking-tight text-[18px] sm:text-[24px] md:text-[28px] lg:text-[36px] leading-tight break-keep">
+            <h3 className="text-text-1 font-extrabold tracking-tight text-[16px] sm:text-[18px] md:text-[22px] lg:text-[24px] leading-tight break-keep">
               {demo.subtitle}
             </h3>
           </div>
@@ -147,15 +141,15 @@ const VideoModal: React.FC<VideoModalProps> = ({ demo, onClose }) => {
             onClick={onClose}
             className={`
               rounded-full flex items-center justify-center bg-white/10 hover:bg-accent text-text-1 hover:text-white transition-all duration-300 shrink-0 shadow-2xl active:scale-90 pointer-events-auto backdrop-blur-md
-              ${shouldRotate ? 'w-12 h-12 ml-auto' : 'w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 ml-auto'}
+              ${shouldRotate ? 'w-12 h-12 ml-auto' : 'w-10 h-10 sm:w-10 sm:h-10 md:w-11 md:h-11 lg:w-12 lg:h-12 ml-auto'}
             `}
             aria-label="Close"
           >
-            <X size={20} className="sm:w-7 sm:h-7" strokeWidth={2.5} />
+            <X size={18} className="sm:w-6 sm:h-6" strokeWidth={2.5} />
           </button>
         </div>
 
-        {/* Video Area */}
+        {/* Video Area - Maximized */}
         <div className="flex-grow relative bg-black flex items-center justify-center overflow-hidden min-h-0">
           {(isLoading && !isYouTube) && (
             <div className="absolute inset-0 flex items-center justify-center z-20 bg-black">
@@ -164,8 +158,8 @@ const VideoModal: React.FC<VideoModalProps> = ({ demo, onClose }) => {
           )}
           
           {isYouTube ? (
-            <div className="w-full h-full p-0 sm:p-10 flex items-center justify-center">
-              <div className="w-full h-full relative shadow-2xl sm:rounded-2xl overflow-hidden aspect-video">
+            <div className="w-full h-full p-0 flex items-center justify-center">
+              <div className="w-full h-full relative shadow-2xl overflow-hidden aspect-video">
                 <iframe
                   className="w-full h-full absolute inset-0"
                   src={youtubeEmbedUrl}
@@ -201,13 +195,13 @@ const VideoModal: React.FC<VideoModalProps> = ({ demo, onClose }) => {
           )}
         </div>
 
-        {/* Controls Bar - Hidden on Mobile */}
+        {/* Controls Bar - Slimmer for PC */}
         {!isYouTube && (
           <div className={`
-            hidden sm:flex bg-surface border-t border-border-subtle flex-col shrink-0
-            ${shouldRotate ? 'px-12 py-6 gap-4' : 'p-5 sm:p-8 md:p-10 lg:px-12 lg:py-6 gap-4 sm:gap-6'}
+            hidden sm:flex bg-surface/80 backdrop-blur-md border-t border-white/5 flex-col shrink-0
+            ${shouldRotate ? 'px-12 py-4 gap-3' : 'px-8 py-3 md:px-10 md:py-4 lg:px-12 lg:py-4 gap-2 sm:gap-3'}
           `}>
-            <div className="relative group w-full flex items-center h-4 sm:h-6">
+            <div className="relative group w-full flex items-center h-4">
               <input 
                 type="range"
                 min="0"
@@ -216,8 +210,8 @@ const VideoModal: React.FC<VideoModalProps> = ({ demo, onClose }) => {
                 value={currentTime}
                 onChange={handleSeek}
                 className="
-                  w-full h-1 sm:h-2 appearance-none bg-white/10 rounded-full outline-none cursor-pointer
-                  accent-accent transition-all group-hover:h-2.5
+                  w-full h-1 sm:h-1.5 appearance-none bg-white/10 rounded-full outline-none cursor-pointer
+                  accent-accent transition-all group-hover:h-2
                 "
                 style={{
                   background: `linear-gradient(to right, #FF3B4D ${ (currentTime / duration) * 100 || 0 }%, rgba(255,255,255,0.1) ${ (currentTime / duration) * 100 || 0 }%)`
@@ -226,27 +220,27 @@ const VideoModal: React.FC<VideoModalProps> = ({ demo, onClose }) => {
             </div>
 
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-6 sm:gap-10">
+              <div className="flex items-center gap-6 sm:gap-8">
                 <button 
                   onClick={togglePlay}
                   className="text-text-1 hover:text-accent transition-all duration-300 transform active:scale-90"
                 >
-                  {isPlaying ? <Pause size={24} className="sm:w-8 sm:h-8" /> : <Play size={24} className="sm:w-8 sm:h-8 fill-current" />}
+                  {isPlaying ? <Pause size={20} className="sm:w-6 sm:h-6" /> : <Play size={20} className="sm:w-6 sm:h-6 fill-current" />}
                 </button>
                 
-                <div className="flex items-center gap-4 text-text-2 font-black font-mono text-[14px] md:text-[16px]">
+                <div className="flex items-center gap-4 text-text-2 font-black font-mono text-[12px] md:text-[14px]">
                   <span className="text-text-1">{formatTime(currentTime)}</span>
                   <span className="opacity-20">/</span>
                   <span>{formatTime(duration)}</span>
                 </div>
               </div>
 
-              <div className="flex items-center gap-6 sm:gap-10">
+              <div className="flex items-center">
                 <button 
                   onClick={toggleMute}
                   className="text-text-1 hover:text-accent transition-all duration-300 transform active:scale-90"
                 >
-                  {isMuted ? <VolumeX size={20} className="sm:w-7 sm:h-7" /> : <Volume2 size={20} className="sm:w-7 sm:h-7" />}
+                  {isMuted ? <VolumeX size={18} className="sm:w-5 sm:h-5" /> : <Volume2 size={18} className="sm:w-5 sm:h-5" />}
                 </button>
               </div>
             </div>
@@ -257,25 +251,22 @@ const VideoModal: React.FC<VideoModalProps> = ({ demo, onClose }) => {
       <style dangerouslySetInnerHTML={{ __html: `
         input[type='range']::-webkit-slider-thumb {
           appearance: none;
-          width: 12px;
-          height: 12px;
+          width: 10px;
+          height: 10px;
           border-radius: 50%;
           background: white;
-          border: 3px solid #FF3B4D;
+          border: 2px solid #FF3B4D;
           cursor: pointer;
-          box-shadow: 0 0 10px rgba(255, 59, 77, 0.4);
+          box-shadow: 0 0 8px rgba(255, 59, 77, 0.4);
         }
         @media (min-width: 640px) {
           input[type='range']::-webkit-slider-thumb {
-            width: 18px;
-            height: 18px;
-            border-width: 4px;
+            width: 14px;
+            height: 14px;
+            border-width: 3px;
           }
         }
 
-        /* 
-         * 세로 기기에서 가로 영상을 볼 때의 강제 회전 레이아웃 
-         */
         @media (max-width: 1024px) and (orientation: portrait) {
           .fixed-rotation-layout {
             position: fixed;

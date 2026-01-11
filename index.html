@@ -29,107 +29,37 @@
       }
     </script>
     <style>
-        :root {
-            --bg-0: #0B0B0D;
-            --accent: #FF3B4D;
-        }
+        :root { --bg-0: #0B0B0D; --accent: #FF3B4D; }
         body {
             font-family: 'Inter', 'Noto Sans KR', sans-serif;
             background-color: var(--bg-0);
             color: #F3F4F6;
             scroll-behavior: smooth;
             -webkit-font-smoothing: antialiased;
-            position: relative;
         }
-        /* Grain Overlay for premium feel */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url("https://grainy-gradients.vercel.app/noise.svg");
-            opacity: 0.04;
-            pointer-events: none;
-            z-index: 9999;
-            filter: contrast(120%) brightness(120%);
-        }
-
-        .section-padding {
-            padding-top: clamp(80px, 12vw, 200px);
-            padding-bottom: clamp(80px, 12vw, 200px);
-        }
-        .container-custom {
-            max-width: 1400px;
-            margin-left: auto;
-            margin-right: auto;
-            padding-left: 0;
-            padding-right: 0;
-        }
-        @media (max-width: 1400px) {
-            .container-custom {
-                padding-left: 32px;
-                padding-right: 32px;
-            }
-        }
-        @media (max-width: 767px) {
-            .container-custom {
-                padding-left: 20px;
-                padding-right: 20px;
-            }
-        }
-
-        /* Typography Scale */
-        .h1-hero { font-size: clamp(38px, 9vw, 120px); line-height: 1.0; font-weight: 900; letter-spacing: -0.04em; }
-        .h2-section { font-size: clamp(32px, 7vw, 84px); line-height: 1.1; font-weight: 800; letter-spacing: -0.03em; }
-        .h3-card { font-size: clamp(20px, 3.2vw, 40px); line-height: 1.2; font-weight: 700; letter-spacing: -0.025em; }
-        .section-lead { font-size: clamp(17px, 1.4vw, 24px); line-height: 1.6; color: #A1A1AA; font-weight: 400; }
-        .body-text { font-size: clamp(15px, 1.1vw, 18px); line-height: 1.7; color: #71717A; }
-        .label-text { font-size: clamp(11px, 0.8vw, 14px); font-weight: 700; text-transform: uppercase; letter-spacing: 0.25em; color: var(--accent); }
-        .caption-text { font-size: clamp(13px, 0.9vw, 16px); line-height: 1.6; color: #71717A; }
-        .nav-item-text { font-size: 15px; line-height: 1.25; letter-spacing: 0.1em; font-weight: 700; }
-
-        /* Scroll Reveal Animation */
         .reveal-on-scroll {
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 800ms cubic-bezier(0.16, 1, 0.3, 1), transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .reveal-on-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #0B0B0D; }
-        ::-webkit-scrollbar-thumb { background: #27272A; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #FF3B4D; }
-
-        .transition-base { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-        .vertical-text { writing-mode: vertical-rl; }
-
-        /* Ambient Orbs */
-        .ambient-orb {
-            position: absolute;
-            width: 60vw;
-            height: 60vw;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(255, 59, 77, 0.08) 0%, rgba(255, 59, 77, 0) 70%);
-            filter: blur(100px);
-            pointer-events: none;
-            z-index: 0;
-        }
+        .reveal-on-scroll.visible { opacity: 1; transform: translateY(0); }
     </style>
 <script type="importmap">
 {
   "imports": {
+    "vite": "https://esm.sh/vite@^7.3.1",
     "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2",
     "react/": "https://esm.sh/react@^19.2.3/",
-    "react": "https://esm.sh/react@^19.2.3"
+    "react": "https://esm.sh/react@^19.2.3",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0"
   }
 }
 </script>
 </head>
 <body>
     <div id="root"></div>
+    <!-- Vite가 이 파일을 읽어서 자동으로 변환해줍니다 -->
+    <script type="module" src="/index.tsx"></script>
 </body>
 </html>
