@@ -43,15 +43,15 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
 
   return (
     <header 
-      className={`fixed top-0 left-0 right-0 z-50 flex justify-center p-6 transition-all duration-700 ease-out
+      className={`fixed top-0 left-0 right-0 z-50 flex justify-center p-4 md:p-6 transition-all duration-700 ease-out
         ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-[-20px] opacity-0'}
       `}
     >
       <nav 
         className={`
-          flex items-center justify-between px-6 md:px-10 transition-colors duration-500 rounded-full border w-full lg:max-w-[1200px] py-4
+          flex items-center justify-between px-6 md:px-8 transition-all duration-500 rounded-full border w-full max-w-[1200px] py-4
           ${isScrolled 
-            ? 'bg-bg-0/70 backdrop-blur-2xl border-white/10 shadow-2xl' 
+            ? 'bg-bg-0/80 backdrop-blur-2xl border-white/10 shadow-2xl scale-[0.98] md:scale-100' 
             : 'bg-white/5 backdrop-blur-lg border-white/5'}
         `}
       >
@@ -63,12 +63,12 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center gap-10">
+        <div className="hidden lg:flex items-center gap-12">
           {navItems.map((item) => (
             <button
               key={item.id}
               onClick={() => scrollTo(item.id)}
-              className={`relative nav-item-text uppercase transition-all duration-300 font-bold px-2 group flex flex-col items-center
+              className={`relative text-[15px] tracking-[0.2em] uppercase transition-all duration-300 font-bold px-2 group flex flex-col items-center
                 ${activeSection === item.id ? 'text-accent' : 'text-text-1/60 hover:text-text-1'}
               `}
             >
@@ -103,7 +103,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
               key={item.id}
               onClick={() => scrollTo(item.id)}
               className={`
-                flex items-center nav-item-text uppercase transition-all duration-300 font-bold
+                flex items-center text-[15px] tracking-[0.2em] uppercase transition-all duration-300 font-bold
                 ${activeSection === item.id ? 'text-accent' : 'text-text-1/50'}
               `}
             >
