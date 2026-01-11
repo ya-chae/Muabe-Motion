@@ -49,10 +49,10 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
     >
       <nav 
         className={`
-          flex items-center justify-between px-6 md:px-8 transition-all duration-500 rounded-full border w-full max-w-[1200px] py-4
+          flex items-center justify-between px-6 md:px-10 transition-all duration-500 rounded-full border w-full max-w-[1000px] py-3.5 md:py-4
           ${isScrolled 
-            ? 'bg-bg-0/80 backdrop-blur-2xl border-white/10 shadow-2xl scale-[0.98] md:scale-100' 
-            : 'bg-white/5 backdrop-blur-lg border-white/5'}
+            ? 'bg-bg-0/90 backdrop-blur-2xl border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.5)] scale-[0.98] md:scale-100' 
+            : 'bg-white/5 backdrop-blur-lg border-white/10'}
         `}
       >
         <div 
@@ -63,19 +63,19 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center gap-12">
+        <div className="hidden lg:flex items-center gap-10">
           {navItems.map((item) => (
             <button
               key={item.id}
               onClick={() => scrollTo(item.id)}
-              className={`relative text-[15px] tracking-[0.2em] uppercase transition-all duration-300 font-bold px-2 group flex flex-col items-center
-                ${activeSection === item.id ? 'text-accent' : 'text-text-1/60 hover:text-text-1'}
+              className={`relative text-[16px] tracking-[0.15em] uppercase transition-all duration-300 font-bold px-1 group flex flex-col items-center
+                ${activeSection === item.id ? 'text-accent' : 'text-text-1/70 hover:text-text-1'}
               `}
             >
               {item.name}
               <span className={`
                 absolute -bottom-2 w-1.5 h-1.5 rounded-full bg-accent transition-all duration-300
-                ${activeSection === item.id ? 'opacity-100 scale-100 shadow-[0_0_10px_rgba(255,59,77,1)]' : 'opacity-0 scale-0 group-hover:opacity-40 group-hover:scale-100'}
+                ${activeSection === item.id ? 'opacity-100 scale-100 shadow-[0_0_12px_rgba(255,59,77,1)]' : 'opacity-0 scale-0 group-hover:opacity-40 group-hover:scale-100'}
               `} />
             </button>
           ))}
@@ -93,7 +93,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
       {/* Mobile Menu Overlay */}
       <div 
         className={`
-          lg:hidden absolute top-[100px] left-6 right-6 bg-bg-0/95 backdrop-blur-3xl border border-white/10 rounded-[32px] overflow-hidden transition-all duration-500 ease-in-out shadow-2xl
+          lg:hidden absolute top-[90px] left-6 right-6 bg-bg-0/98 backdrop-blur-3xl border border-white/10 rounded-[32px] overflow-hidden transition-all duration-500 ease-in-out shadow-2xl
           ${isMenuOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'}
         `}
       >
@@ -103,7 +103,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
               key={item.id}
               onClick={() => scrollTo(item.id)}
               className={`
-                flex items-center text-[15px] tracking-[0.2em] uppercase transition-all duration-300 font-bold
+                flex items-center text-[16px] tracking-[0.15em] uppercase transition-all duration-300 font-bold
                 ${activeSection === item.id ? 'text-accent' : 'text-text-1/50'}
               `}
             >

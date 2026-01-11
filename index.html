@@ -41,7 +41,6 @@
             padding: 0;
         }
 
-        /* [핵심] 컨테이너 너비 */
         .container-custom {
             width: 100%;
             max-width: 1400px;
@@ -58,7 +57,6 @@
             }
         }
 
-        /* Hero 타이틀 복구 */
         .h1-hero {
             font-size: 56px;
             font-weight: 900;
@@ -76,7 +74,6 @@
             .h1-hero { font-size: 124px; }
         }
 
-        /* 유틸리티 클래스 */
         .section-padding {
             padding-top: 100px;
             padding-bottom: 100px;
@@ -88,6 +85,21 @@
             }
         }
 
+        /* Section Lead Text Style */
+        .section-lead {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #A1A1AA;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+        }
+        @media (min-width: 768px) {
+            .section-lead { font-size: 21px; line-height: 1.45; }
+        }
+        @media (min-width: 1024px) {
+            .section-lead { font-size: 26px; line-height: 1.4; }
+        }
+
         .label-text {
             font-size: 13px;
             font-weight: 800;
@@ -96,28 +108,46 @@
             text-transform: uppercase;
         }
 
+        /* H2 Section Title (38/54/72px) */
         .h2-section {
-            font-size: 44px;
+            font-size: 38px;
             font-weight: 900;
             line-height: 1.1;
             letter-spacing: -0.03em;
             color: #F3F4F6;
         }
         @media (min-width: 768px) {
-            .h2-section { font-size: 64px; }
+            .h2-section { font-size: 54px; }
         }
         @media (min-width: 1024px) {
-            .h2-section { font-size: 84px; }
+            .h2-section { font-size: 72px; }
         }
 
-        .section-lead {
-            font-size: 18px;
-            font-weight: 500;
-            line-height: 1.6;
+        .h3-card {
+            font-size: 24px;
+            font-weight: 800;
+            line-height: 1.25;
+            letter-spacing: -0.02em;
+        }
+        @media (min-width: 768px) {
+            .h3-card { font-size: 32px; }
+        }
+
+        .body-text {
+            font-size: 16px;
+            line-height: 1.7;
             color: #A1A1AA;
         }
-        @media (min-width: 1024px) {
-            .section-lead { font-size: 22px; }
+        @media (min-width: 768px) {
+            .body-text { font-size: 18px; }
+        }
+
+        .caption-text {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #71717A;
         }
 
         .reveal-on-scroll {
@@ -127,7 +157,22 @@
         }
         .reveal-on-scroll.visible { opacity: 1; transform: translateY(0); }
 
-        /* Custom Scrollbar */
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+
+        .ambient-orb {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255, 59, 77, 0.12) 0%, rgba(255, 59, 77, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(80px);
+        }
+
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0B0B0D; }
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }

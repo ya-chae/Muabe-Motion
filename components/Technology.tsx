@@ -39,7 +39,7 @@ const Technology: React.FC = () => {
           <div className="reveal-on-scroll">
             <p className="label-text mb-6 font-extrabold">AI INTERACTION ENGINE</p>
             
-            <h2 className="text-[60px] md:text-[84px] lg:text-[96px] font-[900] mb-12 text-text-1 tracking-tighter leading-none">
+            <h2 className="text-[52px] md:text-[72px] lg:text-[84px] font-[900] mb-12 text-text-1 tracking-tighter leading-none">
               Quark AI
             </h2>
             

@@ -47,7 +47,7 @@ const Demo: React.FC = () => {
     <div className="section-padding container-custom overflow-hidden">
       <div className="mb-20 reveal-on-scroll">
         <h2 className="h2-section">
-          QUARK, <span className="text-accent italic font-black">DEMO REEL</span>
+          QUARK, <br className="md:hidden" /> <span className="text-accent italic font-black">DEMO REEL</span>
         </h2>
       </div>
 
